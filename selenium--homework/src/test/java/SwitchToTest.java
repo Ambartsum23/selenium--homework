@@ -32,13 +32,14 @@ public class SwitchToTest {
         driver.switchTo().defaultContent();
         WebElement center = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/div[1]/div[1]/div[2]/div/div[4]/button[2]"));
         center.click();
+        driver.switchTo().defaultContent();
 
     }
 
     @Test
     public void alertClick()  {
         driver.get("https://demoqa.com/alerts");
-        driver.findElement(By.id("alertButton")).click();
+       WebElement ok = driver.findElement(By.id("alertButton"));
         Alert OK = driver.switchTo().alert();
         //System.out.println("Tex in the alert : " + OK.getText());
         driver.switchTo().alert().accept();
