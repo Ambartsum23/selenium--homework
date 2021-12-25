@@ -1,9 +1,12 @@
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import java.util.List;
@@ -13,14 +16,15 @@ import java.awt.*;
 
 public class JSexecutor {
     WebDriver driver;
-    Actions builder;
+    Actions actions;
    JavascriptExecutor js;
+   ChromeOptions options;
 
     @BeforeMethod
     public void bef() throws AWTException {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        builder = new  Actions(driver);
+        driver = new HtmlUnitDriver(BrowserVersion.CHROME, true);
+        actions=new Actions(driver);
         js = (JavascriptExecutor) driver;
         driver.manage().window().maximize();}
 
@@ -30,7 +34,7 @@ public class JSexecutor {
             driver.get(" http://webdriveruniversity.com/To-Do-List/index.html ");;
             List<WebElement>toDoList = driver.findElements(By.cssSelector("ul li"));
             WebElement toDo = toDoList.get(toDoList.size()-1);
-            builder.moveToElement(toDo).perform();
+            actions.moveToElement(toDo).perform();
             List<WebElement> Deletelist = driver.findElements(By.cssSelector("li i"));
             WebElement Delete = Deletelist.get(Deletelist.size()-1);
             js.executeScript("arguments[0].click()", Delete);
@@ -49,7 +53,8 @@ public class JSexecutor {
     }
     @AfterMethod(alwaysRun = true)
     public void tearDown(){
-        driver.quit();
+
+        //driver.quit();
        }
     }
 

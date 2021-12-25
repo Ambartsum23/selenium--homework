@@ -17,7 +17,7 @@ public class FileUploadTest {
 
     }
     @Test
-    public void upload() throws AWTException {
+    public void upload() {
         driver.manage().window().maximize();
         driver.get("http://the-internet.herokuapp.com/upload ");
 
